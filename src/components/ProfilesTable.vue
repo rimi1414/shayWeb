@@ -1,10 +1,9 @@
 <template>
   <div >
-
-
 <div class="bg-grey-9">
-  <div  style=" margin-top: -60px">
 
+<!--  <<heder>>>-->
+  <div  style=" margin-top: -60px">
 
     <div class="bg-grey-9" v-if="profile" >
       <br>   <br>
@@ -15,7 +14,11 @@
       <br>  <br>   <br>
       </div>
     </div>
+  </div>
+  <!--  <<heder>>>-->
 
+
+  <!--    << setting>>-->
     <div class="sett bg-grey-9"  v-if="(profileid == x)" >
       <div class="q-pa-md sett "  >
         <q-btn color="gray" label="Settings" >
@@ -25,7 +28,7 @@
                 <div class="text-h6 q-mb-md">Settings</div>
                 <q-list style="min-width: 100px">
                   <q-item clickable>
-                    <q-item-section>עריכת פרופיל</q-item-section>
+                    <q-item-section @click="aricha">עריכת פרופיל</q-item-section>
                   </q-item>
                   <q-item clickable>
                     <q-item-section>עריכת תמונות</q-item-section>
@@ -37,8 +40,8 @@
                 </q-list>
               </div>
 
-              <q-separator vertical inset class="q-mx-lg" />
 
+              <q-separator vertical inset class="q-mx-lg" />
               <div class="column items-center">
                 <q-avatar size="72px">
                   <img :src="profile.pic">
@@ -60,14 +63,17 @@
       </div>
 
     </div>
+    <!--    << setting>>-->
 
-  </div>
+
+
     <div v-if="!profile">
       <br>   <br>   <br>    <br>
       <p  class="tableTitle pic7   "> פרופילי טונדה: </p>
       <br>   <br>   <br>    <br>
     </div>
-  <q-btn @click="kaftor()">כפתור</q-btn>
+
+<!--  //profileTable///-->
     <div class="q-pa-md bg-grey-9 " v-if="profile">
 <!--      <q-item :to="'/chat/'+ profileId"-->
 <!--              v-if="profileId"-->
@@ -181,36 +187,33 @@
 
       </q-table>
     </div>
-
-
-    <!--    <carusel :profiles="rows"/>-->
-    <!--    <div  style="  background-color:black; width: 90%; margin-right: 20px;  ">-->
-    <!--    <carusel v-if="rows.length !== 0" :profiles="rows" />-->
-    <!--    </div>-->
-    <!--    <br>  <br>    <br>    <br>    <br>-->
-    <div  v-if="!profile" class=" q-pa-md row items-start q-gutter-md" style="margin-right: 50px; max-width: 1200px; ">
+  <!--  //profileTable///-->
 
 
 
-      <q-card dark bordered class="pic1 my-card">
-        <q-card-section>
-          <div class="text-h6">הפרופילים שלנו</div>
-          <q-input borderless dense debounce="300" style="background-color:gray; margin-right: 65%"
-                   v-model="searchByName" placeholder="חיפוש על פי שם או גיל">
-            <template v-slot:append>
-                            <q-btn  class="serch" @click="search(this.$route.params.id)"><q-icon name="search"/></q-btn>
-            </template>
-          </q-input>
-          <div class="text-subtitle2">לחץ להכנס לפרופיל</div>
-        </q-card-section>
 
-        <q-separator dark inset style="color: #C10015; background-color: black"/>
 
-        <q-card-section  >
-<!--          <caruseloneprofile v-if="profile" />-->
-          <carusel v-if="!profile" />
-          <template>
-            <div class="q-pa-lg flex flex-center">
+  <div v-if="!profile" class=" q-pa-md row items-start q-gutter-md" style="margin-right: 50px; max-width: 1200px; ">
+    <q-card dark bordered class="pic1 my-card">
+      <q-card-section>
+        <div class="text-h6">הפרופילים שלנו</div>
+        <q-input borderless dense debounce="300" style="background-color:gray; margin-right: 65%"
+                 v-model="searchByName" placeholder="חיפוש על פי שם או גיל">
+          <template v-slot:append>
+            <q-btn class="serch" @click="search(this.$route.params.id)">
+              <q-icon name="search"/>
+            </q-btn>
+          </template>
+        </q-input>
+        <div class="text-subtitle2">לחץ להכנס לפרופיל</div>
+      </q-card-section>
+
+      <q-separator dark inset style="color: #C10015; background-color: black"/>
+
+      <q-card-section>
+        <carusel/>
+        <template>
+          <div class="q-pa-lg flex flex-center">
               <q-pagination
                   v-model="current"
                   :max="5"
@@ -219,10 +222,7 @@
             </div>
           </template>
         </q-card-section>
-
       </q-card>
-
-
     </div>
   </div>
   </div>
@@ -230,7 +230,6 @@
 </template>
 
 <script>
-import caruseloneprofile from "@/components/caruseloneprofile";
 import carusel from "@/components/carusel";
 import {mapMutations, mapState, mapActions} from 'vuex';
 //
@@ -239,7 +238,7 @@ import profiles from "@/views/profiles";
 
 export default {
   name: "ProfilesTable",
-  components: {carusel, caruseloneprofile},
+  components: {carusel},
   props: ['tableName'],
 
   data() {
@@ -283,6 +282,10 @@ export default {
     ...mapActions('profiles', ['deleteProfile', 'getProfiles','postLevProfile', 'getLove']),
     ...mapMutations('profiles', ['setSerarch', 'resetsearchByName' ,'setLev']),
 
+
+    aricha(){
+this.$emit('update')
+    },
     gomyProfile(id) {
       // this.$router.push({name: 'profile', params:`${props.row.id}`});
       //this.$store.commit('profiles/setProfileId', id)

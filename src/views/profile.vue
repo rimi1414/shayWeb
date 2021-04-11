@@ -3,14 +3,25 @@
     <br><br><br>
 
 
-    <ProfilesTable class="tableV" :profile="profile" :tableName="tableName" :isReload="isReload"></ProfilesTable>
+    <ProfilesTable class="tableV" :profile="profile" :tableName="tableName" :isReload="isReload" @update="test1" ></ProfilesTable>
     <div class="carusel">
       <caruseloneprofile  />-->
 <!--        <carusel  :profiles="[profile]" :forSerch="forSerch" :rowsSerch="rowsSerch" />-->
     </div>
     <br>  <br>  <br>  <br>  <br>  <br>
+    <q-dialog
+        v-model="updateProfile"
+        full-height
+        style="direction: rtl"
+    >
+      <q-card  style="width: 50%; direction: rtl">
+<!--      <q-card class="column full-height" style="width: 50%; direction: rtl">-->
 
-    <AddProfile v-if="(profileid == x)" :profile="profile" :tableName="tableName" @addProfile="changeData"></AddProfile>
+        <AddProfile v-if="(profileid == x) && this.updateProfile === true" :profile="profile" :tableName="tableName" @addProfile="changeData"></AddProfile>
+
+
+      </q-card>
+    </q-dialog>
 
   </div>
 
@@ -37,6 +48,7 @@ export default {
   // computed: mapState('profiles', ['editedProfile', 'profile'] ),
   data() {
     return {
+      updateProfile: false,
       x: null,
       profileid: 2,
       // profile: null,
@@ -59,6 +71,9 @@ export default {
 // // this.profile = localStorageDriver.getProfileById(this.tableName , this.$route.params.id )
 //
 //     },
+    test1(){
+      this.updateProfile =true
+    },
     changeData() {
       this.isReload = !this.isReload
     }

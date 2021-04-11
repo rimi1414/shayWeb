@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <AddProfile  :tableName="'profiles'"/>
-    <messege  :tableName="'profiles'"/>
+<!--    <messege  :tableName="'profiles'"/>-->
 
 
   </div>
