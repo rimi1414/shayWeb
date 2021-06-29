@@ -1,121 +1,88 @@
 <template dir="rtl">
 
+
   <q-layout view="lHh Lpr lFf" dir="rtl">
     <q-header elevated class="glossy">
+      <h1 v-if="$route.fullPath.includes('/profile/') && screenSize > 600" class="fixed-bottom-left">tonda</h1>
       <q-toolbar class="glossy">
 
-        <q-btn v-if="$route.fullPath.includes('/login')"
-            round
-            @click="leftDrawerOpen = !leftDrawerOpen"
-            aria-label="Menu"
-            icon="menu"
-        />
-
-        <template>
-          <q-btn v-if="!userDetails.userId" icon="account_circle" label="login" />
-<!--          <q-btn v-if="$route.fullPath.includes('/login')" icon="account_circle" label="login" />-->
-          <q-btn v-else @click="logoutUser()" icon="account_circle" > logout <br> {{userDetails.name}}</q-btn>
-
-          <div class="btm1"  v-if="!$route.fullPath.includes('/login')">
-<!--            <q-btn size="12px"  @click="logout()"-->
-<!--                   style="background: darkred; color: white" label="התנתק"/>-->
-          </div>
-          <div class="btm2" v-if="!$route.fullPath.includes('/login')">
-<!--            <q-btn  v-go-back.single size="12px" style="background: darkred; color: white" label="חזרה"/>-->
-            <q-btn  @click="goToback()" size="12px" style="background: darkred; position: absolute; margin-right: 20px; margin-top: 67px; opacity: 40%; width: 70px; color: white"  />
-            <q-btn v-go-back.single class="btm6"  style="color: white; width: 100px; margin-left: 300px; position: relative" flat dense label="back" icon="arrow_back" />
-          </div>
-
-          <q-toolbar-title class="tonda-t">
-
-          </q-toolbar-title>
-
-          <div @click="goToFirst()" class="tondi">tonda</div>
-          <div v-if="!$route.fullPath.includes('/login')" style="margin-right: 75%; margin-top: 02%; position: absolute"  @click="goToPrifiles()">
-            <q-btn  size="12px" style="background: darkred; color: white" label="פרופילים"/>
-          </div>
-          <div v-if="!$route.fullPath.includes('/login')" class="btm4" @click="goToPrifile()">
-            <q-btn  icon="person_search" round size="12px" style="background: darkred; color: white"  />
-<!--            <q-btn  size="12px" style="background: darkred; color: white" label="פרופיל אישי"/>-->
-          </div>
-          <div v-if="!$route.fullPath.includes('/login')" class="btm5" @click="goToPrifile()">    </div>
-          <div class="btm7">
-            <q-btn @click="gochat()" style="margin-left: 20%"  color="darkred" flat dense label="הודעות" icon="mail" />
-          </div>
-          <q-btn class="loginbtn" v-if="$route.fullPath.includes('/login')" icon="account_circle" label="login" />
-
-        </template>
+        <div v-if="!$route.fullPath.includes('/login')">
+          <q-btn class="fixed-top-right" style="margin-top: 3%; margin-left: 1%"
+                 color="white"
+                 @click="logout()"
+                 dense
+                 flat
+                 icon="logout"
+                 round
+                 size="18px">
+          <q-tooltip>התנתק</q-tooltip>
+          </q-btn>
+        </div>
 
 
+        <div class="btnHead row" v-if="!$route.fullPath.includes('/login')">
+          <q-btn
+              class="q-mr-sm"
+              dense
+              flat
+              color="white"
+              icon="people"
+              round
+              size="18px"
+              to="/profiles">
+            <q-tooltip>פרופילים</q-tooltip>
+          </q-btn>
+
+
+          <p class="fixed-top nameDesct">hey {{ userDetails.name }} </p>
+
+
+          <q-btn
+              :class="screenSize>600 ? 'q-mr-md q-ml-md' : 'q-mr-sm'"
+              dense
+              flat
+              round
+              size="18px"
+              @click="goToProfile"
+          >
+            <q-tooltip> my profile</q-tooltip>
+            <q-avatar style="width: 30px; height: 30px">
+              <img src="https://www.photo-art.co.il/wp-content/uploads/2015/07/BY1A5781.jpg">
+            </q-avatar>
+          </q-btn>
+
+          <q-btn
+              dense
+              flat
+              color="white"
+              icon="mail"
+              round
+              size="18px"
+              to="/pageUser">
+            <q-tooltip>הודעות</q-tooltip>
+          </q-btn>
+        </div>
+
+
+        <div v-if="screenSize <600" style="margin-right: 65%; margin-top: 12%">
+          <p v-if="!$route.fullPath.includes('/profile/')" class="title">
+            tonda
+          </p>
+        </div>
+        <p v-if="!$route.fullPath.includes('/profile/') && screenSize >600" class="title">
+          tonda
+        </p>
 
       </q-toolbar>
+
     </q-header>
 
-<!--    <q-drawer-->
-<!--        v-model="leftDrawerOpen"-->
-<!--        show-if-above-->
-<!--        bordered-->
-<!--        content-class="bg-grey-2"-->
-<!--    >-->
-<!--      <q-list>-->
-<!--        <q-item-label header>אפשרויות נוספות</q-item-label>-->
-<!--        <q-item clickable tag="a" target="_blank" href="https://quasar.dev">-->
-<!--          <q-item-section avatar>-->
-<!--            <q-icon name="school"/>-->
-<!--          </q-item-section>-->
-<!--          <q-item-section>-->
-<!--            <q-item-label>Docs</q-item-label>-->
-<!--            <q-item-label caption>quasar.dev</q-item-label>-->
-<!--          </q-item-section>-->
-<!--        </q-item>-->
-<!--        <q-item clickable tag="a" target="_blank" href="https://github.com/quasarframework/">-->
-<!--          <q-item-section avatar>-->
-<!--            <q-icon name="code"/>-->
-<!--          </q-item-section>-->
-<!--          <q-item-section>-->
-<!--            <q-item-label>Github</q-item-label>-->
-<!--            <q-item-label caption>github.com/quasarframework</q-item-label>-->
-<!--          </q-item-section>-->
-<!--        </q-item>-->
-<!--        <q-item clickable tag="a" target="_blank" href="https://chat.quasar.dev">-->
-<!--          <q-item-section avatar>-->
-<!--            <q-icon name="chat"/>-->
-<!--          </q-item-section>-->
-<!--          <q-item-section>-->
-<!--            <q-item-label>Discord Chat Channel</q-item-label>-->
-<!--            <q-item-label caption>chat.quasar.dev</q-item-label>-->
-<!--          </q-item-section>-->
-<!--        </q-item>-->
-<!--        <q-item clickable tag="a" target="_blank" href="https://forum.quasar.dev">-->
-<!--          <q-item-section avatar>-->
-<!--            <q-icon name="forum"/>-->
-<!--          </q-item-section>-->
-<!--          <q-item-section>-->
-<!--            <q-item-label>Forum</q-item-label>-->
-<!--            <q-item-label caption>forum.quasar.dev</q-item-label>-->
-<!--          </q-item-section>-->
-<!--        </q-item>-->
-<!--        <q-item clickable tag="a" target="_blank" href="https://twitter.com/quasarframework">-->
-<!--          <q-item-section avatar>-->
-<!--            <q-icon name="rss_feed"/>-->
-<!--          </q-item-section>-->
-<!--          <q-item-section>-->
-<!--            <q-item-label>Twitter</q-item-label>-->
-<!--            <q-item-label caption>@quasarframework</q-item-label>-->
-<!--          </q-item-section>-->
-<!--        </q-item>-->
-<!--      </q-list>-->
-<!--    </q-drawer>-->
 
-<div style="background-color:darkgray">
-
-
-
-
-    <q-page-container style="margin-top: -30px">
-      <router-view></router-view>
-    </q-page-container>
-</div>
+    <div style="background-color:darkgray">
+      <div style="margin-top: 3%">
+        <router-view></router-view>
+      </div>
+    </div>
   </q-layout>
 </template>
 
@@ -126,57 +93,44 @@ import {mapActions, mapMutations, mapState} from "vuex";
 
 export default {
   name: 'LayoutDefault',
-  computed: {...mapState('profiles', [ 'profileId']), ...mapState('chat', ['userDetails'])},
+  computed: {...mapState('profiles', ['profileId']), ...mapState('logUser', ['userDetails'])},
 
   data() {
     return {
+      screenSize: window.innerWidth,
       leftDrawerOpen: false
     }
   },
 
-  methods :{
+  methods: {
     ...mapMutations('profiles', ['setProfileId']),
-    ...mapActions('profiles', [ 'getOneProfile']),
-    ...mapActions('chat', [ 'handleAauthStateChanged', 'logoutUser']),
-    goToFirst(){
-      this.$router.push(`/First`)
-    },
-    goToPrifiles(){
-      this.$router.push(`/profiles`)
-    },
-    goToback(){
-      this.$router.go(-1)
-    },
-    goToPrifile(){
+    ...mapActions('profiles', ['getOneProfile']),
+    ...mapActions('logUser', ['handleAauthStateChanged', 'logoutUser']),
+
+
+    goToProfile() {
       this.setProfileId(`${window.user.uid}`)
       const w = this.$route.fullPath
-      if(w !== '/profile/:id'){
+      if (w !== '/profile/:id') {
         this.getOneProfile();
       }
       this.getOneProfile();
       this.$router.push(`/profile/${window.user.uid}`);
 
     },
-    gochat(){
-      this.$router.push('/pageUser');
-    },
-    logout(){
-      firebaseInstance.firebase.auth()
-          .signOut()
-          .then(() => {
-        // Sign-out successful.
-      }).catch((error) => {
-        // An error happened.
-      });
+
+    logout() {
+      this.logoutUser()
+
       this.$router.push('/login');
     },
 
 
   },
 
-mounted() {
+  mounted() {
     this.handleAauthStateChanged()
-},
+  },
 
   components: {
     Home
@@ -186,70 +140,72 @@ mounted() {
 }
 </script>
 
-<style >
-
-
-.tondi {
-  position: absolute;
-  margin-right: 40%;
-  cursor: pointer;
-
+<style>
+.title {
+  animation: bounce .5s alternate infinite ease-in;
+  /*margin-top: 1.5%;*/
+  margin-right: 90%;
+  font-size: 35px;
+  font-family: "Guttman Kav";
 }
+
+.btnHead {
+  position: absolute;
+  margin-top: 1%;
+  margin-right: 43%;
+}
+
+.nameDesct {
+  position: absolute;
+  /*margin-top: -14%;*/
+  font-size: 20px;
+  color: white;
+}
+
 
 .glossy {
   height: 90px;
   text-align: center;
   font-size: 50px;
-  font-weight: 800;
   color: hsl(0, 100%, 30%);
   background-color: black;
 }
 
-.btm1 {
-  font-size: 100px;
-
-  margin-right: 10px;
-  margin-top: 30px;
+h1 {
+  animation: bounce .5s alternate infinite ease-in;
 }
 
 
-.btm2 {
-  font-size: 100px;
+@media only screen and (max-width: 600px) {
+  .btnHead {
+    position: absolute;
+    margin-top: 12%;
+    margin-right: 25%;
+  }
 
-  margin-right: 10px;
-  margin-top: 30px;
-}
-.btm3{
-  font-size: 100px;
+  .title {
+    margin-top: 10%;
+    margin-right: 63%;
 
-  margin-left: 1%;
-  margin-top: 30px;
+  }
+}
 
-}
-.btm4{
-  font-size: 100px;
+@media screen and (min-width: 600px) {
 
-  margin-left: 2%;
-  margin-top: 30px;
+  @keyframes bounce {
+    0% {
+      transform: translatey(10%);
+    }
 
+  }
+
+  h1 {
+    color: red;
+    font-family: "Guttman Kav";
+    margin-top: 50%;
+    /*display: inline-block; !*needed to trigger update *!*/
+  }
 }
-.btm5{
-  font-size: 100px;
-  /*margin-left: 10%;*/
-  margin-top: 30px;
-}
-.btm6{
-  color: white;
-  margin-left: 20px;
-}
-.btm7{
- margin-top: 40px;
-  margin-left: 20px;
-}
-.loginbtn{
-  margin-left: 3%;
-}
-.input {
-  margin-right: 40%;
-}
+
+
 </style>

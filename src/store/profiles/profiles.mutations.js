@@ -4,11 +4,17 @@ export default {
     setSerarch:((state, searchByName)=> state.searchByName = searchByName),
 
     setProfiles: ((state, profiles)=> state.profiles = profiles),
+    setMyLoves: ((state, profiles)=> state.allMyLove = profiles),
 
     setProfile: ((state, profile)=>
         state.profile = profile),
 
+    setMyProfile: ((state, profile)=>
+        state.myProfile = profile),
+
     setEditedProfileId: ((state , id)=> state.edtedProfileId = id),
+
+    setIsLove: ((state , bool)=> state.isLove = bool),
 
     setLev: ((state , model3)=> state.model3 = model3),
 
@@ -26,6 +32,8 @@ export default {
     // resetProfileId: ((state) => state.ProfileId = null),
 
     resetEditedProfileId: ((state) => state.editedProfileId = ''),
+
+    resetMyProfile: ((state) => state.myProfile = null),
 
     resetsearchByName: ((state) => state.searchByName = null),
 

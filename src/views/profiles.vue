@@ -1,70 +1,131 @@
-<template>
-  <div class="pic1">
+<template >
+  <div class="picAddMobile" style="height: 1000px; background-color: black" >
 
-<!--    <carusel  :profiles="rows" :forSerch="forSerch" :rowsSerch="rowsSerch" />-->
-    <ProfilesTable  :tableName="'profiles'" class="pic1"/>
-    <br>
-    <br>
-    <br>
-    <br>
-<!--    <ProfilesTable1  :tableName="'profiles'" class="pic2"/>-->
-    <br>
-    <br>
-    <br>
-    <br>
-<!--    <page-user @isis="realsech" :tableName="'profiles'"/>-->
-    <br>
-    <br>
-    <br>
-<!--    <page-chat @isis="realsech" :tableName="'profiles'"/>-->
+    <div  :class="screenSize < 600 ? 'q-pa-sm  items-start q-gutter-md' : 'contain q-pa-sm  items-start q-gutter-md'" >
+      <q-card dark bordered class="backBlack"  >
+
+<!--        header-->
+        <profilesHeader class="head" />
+        <!--        header-->
+
+        <q-separator dark  style=" background-color: darkred"/>
+        <q-card-section>
+
+<!--          carusel-->
+          <carusel />
+          <!--          carusel-->
+
+
+          <template>
+            <div class="q-pa-lg flex flex-center">
+              <q-pagination
+                  v-model="current"
+                  :max="5"
+              >
+              </q-pagination>
+            </div>
+          </template>
+        </q-card-section>
+      </q-card>
+
+
+
+
+
+
+
+    </div>
+
   </div>
+
 </template>
 
 <script>
-// import carusel from "@/components/carusel";
-import ProfilesTable from "@/components/ProfilesTable";
-import ProfilesTable1 from "@/components/ProfilesTable1";
-// import PageUser from "@/components/pageUser";
-// import PageChat from "@/components/pageChat";
+import profilesHeader from "@/components/profiles/profilesHeader";
+import {mapState} from "vuex";
+import carusel from "@/components/carusel";
 
-import {mapMutations, mapState, mapActions} from 'vuex';
-
-// import AddProfile from "@/components/AddProfile";
 export default {
 
 
   name: "profiles",
   components: {
+     carusel, profilesHeader
+  },
+  data() {
+    return {
+      screenSize : window.innerWidth,
+      current: 1,
+      searchByName:null,
+      slide: 1,
 
 
-    ProfilesTable,
-    ProfilesTable1
+
+    }
   },
 
+  computed: {...mapState('profiles', ['editedProfileId', 'profiles', 'profile' , 'model3']),
+    ...mapState('chat', ['users' ,'userDetails'])},
 
-
+  // todo:router gard:
   created() {
     if (!window.user){
       this.$router.push('/login')
   }
 
 
+
 },
+
+  // todo: fix this:
+  // watch:{
+  //   current(){
+  //     if(this.current){
+  //       this.getProfiles(this.current)
+  //     }
+  //   }
+  // }
 
 }
 </script>
 
-<style scoped>
-
-.pic1{
-  background-image: url("https://mail.google.com/mail/u/0?ui=2&ik=b9425fd237&attid=0.1&permmsgid=msg-a:r-2818125448641862777&th=177da7f9710ff0e6&view=fimg&sz=s0-l75-ft&attbid=ANGjdJ_3UqhB-LH6BzgnroJQ_DUjHv54OQRoTgR4KFWC4XSZWisl0vK4xrswvhvC-IA_KiZcCyukpmvF_SSrHMGkEvYuWQQCOZLT5yeYugzuEbv7b03Zfy6lI-E8cI8&disp=emb&realattid=177da7f1de5207cf5f03");
-  background-size:100%;
-
+<style >
+.contain{
+  max-width: 1100px;
+  margin: auto;
 }
-.pic{
-  background-image: url("https://firebasestorage.googleapis.com/v0/b/tonda-datind.appspot.com/o/iUgJMzIl9QRRYez0cDeNRN0IR9N2%2Fimages%2Fmountains.jpg?alt=media&token=0801d8f4-efb7-4e46-876d-143a4389a8a6");
-  background-size:100%;
-  backdrop-filter: blur(8px);
 
+.picAddMobile{
+  background-image: url("https://firebasestorage.googleapis.com/v0/b/tonda-datind.appspot.com/o/%D7%9C%D7%91%D7%91%D7%95%D7%AA.png?alt=media&token=6e0a5c80-b1e7-47cc-aa77-40c897743512");
+  background-repeat: no-repeat;
+  background-size: 100%;
+background-position-y: 20% ;
+}
+.search {
+  color: #1D1D1D;
+  background-color: darkred;
+  margin-right: 10%;
+}
+.backBlack{
+  background-color: rgba(0,0,0, 0.7); /* Black w/opacity/see-through */
+}
+
+.a-title {
+  height: 1%;
+  color: aliceblue;
+  font-family: "Guttman Kav";
+  width: 64%;
+  padding: 3%
+}
+@media screen and (max-width:600px) {
+  .a-title{
+    font-size: 30px;
+    padding-top: 7%;
+    padding-bottom: 7%;
+    width: 150%;
+  }
+.head{
+  margin-top: 15%;
+}
 }
 </style>

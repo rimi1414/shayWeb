@@ -1,111 +1,111 @@
-
 <template>
-  <div class="q-pa-md row aaa">
-    <!--    <q-carousel class="qqq"-->
-    <!--        v-for="profile of profiles"-->
-    <!--        animated-->
-    <!--        v-model="slide"-->
-    <!--        thumbnails-->
-    <!--        infinite-->
-    <!--    >-->
-    <!--      <q-carousel-slide @click="gomyprofile1(id)" :name="1" :img-src="profile.pic" class="asa" />-->
-    <!--      <q-carousel-slide :name="1" :img-src="profile.image" class="asb"/>-->
 
-    <!--    </q-carousel>-->
-    <!--    <q-input borderless dense debounce="300" style="background-color:gray; margin-right: 65%" v-model="serchByName" placeholder="חיפוש">-->
-    <!--      <template v-slot:append>-->
+  <div>
 
-    <!--        <q-btn class="del222" @click="remove(props.row.id)"><q-icon name="search"/></q-btn>-->
+    <q-input borderless dense debounce="300" class="search bg-grey-8"
+             v-model="searchByName" placeholder="חיפוש על פי שם ">
 
-    <!--      </template>-->
-    <!--    </q-input>-->
+    </q-input>
 
-
-    <q-card class="my-card q-ma-sm"   v-for="(profile, index) of profiles">
-      <q-carousel
-          class="my-card"
-          swipeable
-          animated
-          v-model="slides[index]"
-          thumbnails
-          infinite
-
-      >
-
-        <q-carousel-slide   class="my-card" @click="gomyprofile1(profile.id)"  :name="2" :img-src="profile.pic">
-
-          <div class="container">
-            <div class="block"></div>
-            <div class="text text-blue-2">גיל: {{profile.date}}</div>
-          </div>
-        </q-carousel-slide>
-        <q-carousel-slide :name="1" :img-src="profile.image" @click="gomyprofile1(profile.id)" >
-          <div class="container">
-            <div class="block"></div>
-            <div class="text text-blue-2"> {{profile.name}}</div>
-          </div>
-
-        </q-carousel-slide>
-
-      </q-carousel>
+      <div class="locateCarousel row">
+        <q-card  v-for="(profile, index) of profilesCarousel" :class="screenSize > 600 ? 'q-ma-sm backNone' : 'q-ml-md q-mt-md q-mb-md backNone'" >
+          <q-card class="backNone" style="position: sticky" >
+            <p  v-if="profile.name" class="profName" >{{profile.name}}</p>
+            <p v-else class="profName" >no name</p>
+          </q-card>
+          <q-carousel class="sizeCarousel backNone "
+                      swipeable
+                      animated
+                      v-model="slide[index]"
+                      :thumbnails="screenSize > 600"
+                      infinite
+          >
+            <q-carousel-slide v-if="screenSize > 600" class="borderRadius" @click="goHisProfile(profile.id)" :name="1" :img-src="profile.image"></q-carousel-slide>
+            <q-carousel-slide v-if="screenSize > 600" class="borderRadius" @click="goHisProfile(profile.id)" :name="2" :img-src="profile.pic" ></q-carousel-slide>
+            <q-carousel-slide v-if="screenSize < 600"  class="borderRadius"  :name="1" :img-src="bool[index] === true ? profile.pic : profile.image" @click="goHisProfile(profile.id)"></q-carousel-slide>
+          </q-carousel>
+          <q-btn v-if="screenSize < 600" class="west-btn"  @click="nextPic(index)" icon="west"/>
+        </q-card>
+    </div>
 
 
-    </q-card>
 
   </div>
 </template>
 
 <script>
 import {mapGetters, mapMutations, mapState, mapActions} from 'vuex'
-import profiles from "@/views/profiles";
 
 export default {
 
-
-  props:['rowsSerch' , 'forSerch'],
   name: "carusel",
   data:() => ({
-
-
-
-    currentPage:0,
-    nextPage: null,
-    totalPages:5,
-    // slide: 1,
-    slides: [],
-    localProfile : null,
-    bb: []
+    profilesCarousel :'',
+    searchByName:'',
+    bool: [],
+    screenSize: window.innerWidth,
+    slide: [],
+    // currentPage:0, todo: this- page 1/2/3
   }),
   computed: {
     ...mapState('profiles', ['editedProfileId', 'profiles', 'profileId', 'profile']),
-    ...mapState('chat' , ['userDetails', 'users'])
-},
+    // todo: this filter
+    // filterProfiles: function (){
+    //   console.log(this.searchByName)
+    //   return this.profiles.filter((profile , key) =>{
+    //     return profile.name.match(this.searchByName)
+    //   })
+    // }
+  },
 
 
   methods: {
-    ...mapGetters('chat', ['users']),
     ...mapMutations('profiles', ['setProfileId','resetProfileId']),
-    ...mapActions('profiles', ['getProfiles']),
+    ...mapActions('profiles', ['getProfiles', 'getOneProfile' , 'getMyProfile']),
 
-    gomyprofile1(id){
+    nextPic(index){
+      this.bool[index] = !this.bool[index]
+      this.getProfiles().then(()=>{
+        this.profiles.forEach(pn=> this.bool.push(false))
+      })
+      this.profilesCarousel=this.profiles
+    },
+
+    goHisProfile(id){
       this.setProfileId(id)
-
-      // this.$router.push({name: 'profile', params:`${props.row.id}`});
       this.$router.push(`/profile/${id}`);
-
     },
   },
+
   created() {
-var n = this.profiles
-    this.getProfiles().then(()=>{
-      this.profiles.forEach(p=> this.slides.push(1))
-      console.log(this.slides)
-    })
+    if(this.$route.fullPath.includes('/profiles')){
+      this.getMyProfile().then(()=>{
+        this.getProfiles().then(()=>{
+          this.profiles.forEach(p=> this.slide.push(1))
+          this.profilesCarousel=this.profiles
 
-
+        })
+      })
+    }else {
+      this.profilesCarousel=this.profiles
+      if (this.profiles != null){
+        this.profiles.forEach(p=> this.slide.push(1))
+      }
+      if(this.profiles.length === 0 || this.profiles === null){
+        this.$emit('noFavorite')
+      }
+    }
   },
+  watch: {
+    searchByName() {
+      this.profilesCarousel= this.profiles.filter(profile => profile.name.match (this.searchByName));
+    },
+  },
+
+
   destroyed() {
-    // this.resetProfileId;
+    // todo:chat if its needs
+    this.resetProfileId;
   }
 
 
@@ -113,56 +113,63 @@ var n = this.profiles
 </script>
 
 <style scoped>
-.aaa {
-  padding-right: 30px;
-  padding-bottom: 50px;
-  padding-left: 80px;
+
+.sizeCarousel{
+  height: 200px;
+  width: 200px;
 }
-.qqq{
-  height: 90px;
-  width: 10%;
+
+.locateCarousel{
+  padding: 2% 2% 2% 2%;
+}
+
+
+.borderRadius{
+  background-color: rgba(0,0,0, 0.0);
   border-radius: 50%;
 }
-.my-card{
-  height:200px;
-  width:200px;
-  border-radius: 90px;
 
+.profName{
+  background-color: rgba(0,0,0, 0.6);
+  text-align: center;
+  border-radius: 30%;
+  margin-bottom: 1px;
+  margin-right: 15%;
+  width: 70%;
 }
-.container {
-  position: relative;
-  width: 300px;
-  height: 200px;
-  margin-top: 60%;
 
+.backNone{
+  background-color: rgba(0,0,0, 0);
 }
-.block {
-  background: gray;
-  filter: alpha(opacity=60);
-  /* IE */
-  -moz-opacity: 0.6;
-  /* Mozilla */
-  opacity: 0.7;
-  /* CSS3 */
+.search{
   position: absolute;
-  top: 0;
-  left: 0;
-  height: 40%;
-  width: 100%;
-  margin-left: 10%;
-  /*margin-top: 10%;*/
+  margin-top: -6% ;
+  background-color:gray;
+  margin-right: 70%;
+  width: 200px;
 }
-.text {
-  font-family: "Lucida Console", "Courier New", monospace;
-  font-weight: bold;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  margin-right: 20%;
-  margin-top: -10px;
-  position: relative;
+
+.west-btn{
+  margin-right: 30%;
 }
 
 
+@media screen and (max-width:600px) {
+
+.search{
+  margin-top: -16%;
+  margin-right: 55%;
+  text-align: left;
+width: 40%;
+}
+  .sizeCarousel{
+    border-radius: 500px;
+    height: 90px;
+    width: 90px;
+  }
+  .locateCarousel{
+    padding: 0%
+  }
+
+  }
 </style>

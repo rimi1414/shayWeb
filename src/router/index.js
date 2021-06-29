@@ -10,7 +10,7 @@ const routes = [
     path: '/',
     name: 'Home',
     component: Home,
-    meta : {auuthNotRequired : false}
+    meta : {authNotRequired : false}
   },
   {
     path: '/profile/:id',
@@ -21,6 +21,21 @@ const routes = [
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "about" */ '../views/profile.vue')
   },
+  // {
+  //   path: '/chat/',
+  //   name: 'chat',
+  //   meta : {authNotRequired : false},
+  //   // route level code-splitting
+  //   // this generates a separate chunk (about.[hash].js) for this route
+  //   // which is lazy-loaded when the route is visited.
+  //   component: () => import(/* webpackChunkName: "about" */ '../views/Chat.vue')
+  // },
+  // {path: '/chat', component: () => import('../views/Chat'), meta: {authNotRequired: false}},
+  // {path: '/chat/:id', component: () => import('../views/Chat'), meta: {authNotRequired: false}},
+  // {path: '/chat-menu', component: () => import('../components/Chat/ChatMenu'), meta: {authNotRequired: false}},
+  // {path: '/direct-message', component: () => import('../components/Chat/DirectMessage'), meta: {authNotRequired: false}},
+  // {path: '/group-message', component: () => import('../components/Chat/Group/GroupMessage'), meta: {authNotRequired: false}},
+
   {
     path: '/profiles',
     name: 'profiles',
@@ -32,15 +47,25 @@ const routes = [
 
   },
   {
-    path: '/chat/:otherUserId',
-    name: 'chat',
+    path: '/favorite',
+    name: 'favorite',
     meta : {authNotRequired : false},
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../components/pageChat.vue')
+    component: () => import(/* webpackChunkName: "about" */ '../views/favorite.vue')
 
   },
+  // {
+  //   path: '/chat/:otherUserId',
+  //   name: 'chat',
+  //   meta : {authNotRequired : false},
+  //   // route level code-splitting
+  //   // this generates a separate chunk (about.[hash].js) for this route
+  //   // which is lazy-loaded when the route is visited.
+  //   component: () => import(/* webpackChunkName: "about" */ '../components/pageChat.vue')
+  //
+  // },
   {
     path: '/messaging',
     name: 'messaging',
@@ -58,11 +83,21 @@ const routes = [
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../components/pageUser.vue')
+    component: () => import(/* webpackChunkName: "about" */ '../views/pageUser.vue')
+  },
+  {
+    path: '/pageUser/:id',
+    name: 'user-page',
+    meta : {authNotRequired : false},
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () => import(/* webpackChunkName: "about" */ '../views/pageUser.vue')
   },
   {
     path: '/login',
     name: 'login',
+    meta : {authNotRequired : true},
     // meta : {authNotRequired : true},
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
@@ -70,23 +105,8 @@ const routes = [
     component: () => import(/* webpackChunkName: "about" */ '../views/login')
 
   },
-  {
-    path: '/minhal',
-    name: 'minhal',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../components/minhal')
-  },
-  {
-    path: '/First',
-    name: 'First',
-    meta : {authNotRequired : true},
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/First.vue')
-  },
+
+
   {
     path: '/about',
     name: 'About',

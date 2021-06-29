@@ -1,28 +1,33 @@
 <template>
-  <div class="home">
-    <AddProfile  :tableName="'profiles'"/>
-<!--    <messege  :tableName="'profiles'"/>-->
+  <div  >
+
+    <AddProfile  :tableName="'profiles'" class="addProf" />
 
 
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
 import AddProfile from "@/components/AddProfile";
-import Messege from "@/components/messege";
+
 
 
 export default {
   name: 'Home',
-
   components: {
-    Messege,
-    AddProfile,
+    AddProfile
   },
   data: () => ({
     isReload: false,
   }),
-
+created() {
+  // if (!window.user){
+  //   this.$router.push('/login')
+  // }
+}
 }
 </script>
+
+<style lang="sass">
+
+</style>

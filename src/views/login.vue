@@ -1,24 +1,23 @@
 <template>
   <q-page class="q-pa-md" style="background: #1D1D1D">
 
-    <div>
-      <br> <br>
-      <p  class="title">
-        אפליקציית הכרויות  </p></div>
     <br>
-
-    <q-card class="full-width" >
+    <br>
+<div :class=" screenSize < 600 ? 'welcome-anima-mobile' : 'welcome-anima-desk'">ברוך הבא</div>
+<div :class=" screenSize < 600 ? 'welcome-anima2-mobile' : 'welcome-anima2-desk' ">לטונדה</div>
+    <q-card :class="screenSize < 600 ? ' margin' : 'desktop'" >
       <q-tabs
           v-model="tab"
           dense
           class="text-grey glossy"
-          style="background-color: darkred"
-          active-color="black"
+          style="background-color: black"
+          active-color="red"
           indicator-color="black"
           align="justify"
           narrow-indicator
       >
         <q-tab name="login" label="login" />
+        <q-separator vertical color="white" />
         <q-tab name="register" label="register" />
       </q-tabs>
 
@@ -51,6 +50,7 @@ name: "first",
   },
   data () {
     return {
+      screenSize:window.innerWidth,
       tab: 'login',
       inputdata :{
         email: '',
@@ -62,65 +62,65 @@ name: "first",
 
     }
   },
-  methods : {
-    goToHome() {
-      this.$router.push(`/`)
-    },
-    login(){
-      const provider = new firebaseInstance.firebase.auth.GoogleAuthProvider();
-      firebaseInstance.firebase.auth()
-          .signInWithPopup(provider)
-          .then((result) => {
-            /** @type {firebase.auth.OAuthCredential} */
-            var credential = result.credential;
-
-            // This gives you a Google Access Token. You can use it to access the Google API.
-            var token = credential.accessToken;
-            // The signed-in user info.
-            var user = result.user;
-            window.user = result.user;
-            this.$router.push('/')
-            // ...
-          }).catch((error) => {
-        // Handle Errors here.
-        var errorCode = error.code;
-        var errorMessage = error.message;
-        // The email of the user's account used.
-        var email = error.email;
-        // The firebase.auth.AuthCredential type that was used.
-        var credential = error.credential;
-        // ...
-      });
-    },
-    newlogin(){
-      firebaseInstance.firebase.auth()
-          .createUserWithEmailAndPassword(this.inputdata.email, this.inputdata.password)
-          .then((userCredential) => {
-            // Signed in
-            var user = userCredential.user;
-            window.user = userCredential.user;
-            this.$router.push('/')
-            // ...
-          })
-          .catch((error) => {
-            var errorCode = error.code;
-            var errorMessage = error.message;
-            // ..
-          });
-    },
-    returnlogin(){
-      firebaseInstance.firebase.auth().signInWithEmailAndPassword(this.inputdata.emaillog, this.inputdata.passwordlog)
-          .then((userCredential) => {
-            // Signed in
-            var user = userCredential.user;
-            // ...
-          })
-          .catch((error) => {
-            var errorCode = error.code;
-            var errorMessage = error.message;
-          });
-    }
-  },
+  // methods : {
+  //   goToHome() {
+  //     this.$router.push(`/`)
+  //   },
+  //   login(){
+  //     const provider = new firebaseInstance.firebase.auth.GoogleAuthProvider();
+  //     firebaseInstance.firebase.auth()
+  //         .signInWithPopup(provider)
+  //         .then((result) => {
+  //           /** @type {firebase.auth.OAuthCredential} */
+  //           var credential = result.credential;
+  //
+  //           // This gives you a Google Access Token. You can use it to access the Google API.
+  //           var token = credential.accessToken;
+  //           // The signed-in user info.
+  //           var user = result.user;
+  //           window.user = result.user;
+  //           this.$router.push('/')
+  //           // ...
+  //         }).catch((error) => {
+  //       // Handle Errors here.
+  //       var errorCode = error.code;
+  //       var errorMessage = error.message;
+  //       // The email of the user's account used.
+  //       var email = error.email;
+  //       // The firebase.auth.AuthCredential type that was used.
+  //       var credential = error.credential;
+  //       // ...
+  //     });
+  //   },
+  //   newlogin(){
+  //     firebaseInstance.firebase.auth()
+  //         .createUserWithEmailAndPassword(this.inputdata.email, this.inputdata.password)
+  //         .then((userCredential) => {
+  //           // Signed in
+  //           var user = userCredential.user;
+  //           window.user = userCredential.user;
+  //           this.$router.push('/')
+  //           // ...
+  //         })
+  //         .catch((error) => {
+  //           var errorCode = error.code;
+  //           var errorMessage = error.message;
+  //           // ..
+  //         });
+  //   },
+  //   returnlogin(){
+  //     firebaseInstance.firebase.auth().signInWithEmailAndPassword(this.inputdata.emaillog, this.inputdata.passwordlog)
+  //         .then((userCredential) => {
+  //           // Signed in
+  //           var user = userCredential.user;
+  //           // ...
+  //         })
+  //         .catch((error) => {
+  //           var errorCode = error.code;
+  //           var errorMessage = error.message;
+  //         });
+  //   }
+  // },
   created() {
   if (window.user){
     this.$router.push('/profiles')
@@ -130,30 +130,108 @@ name: "first",
 </script>
 
 <style scoped>
+.margin{
+  margin-right: 1.5%;
+width: 97%;
+  margin-top: 20%;
+}
+.backNone{
+  display: none;
+}
+.welcome-anima-desk{
+  font-family: Tahoma, Verdana, Segoe, sans-serif;
+  font-size: 50px;
+  width: 300px;
+  height: 100px;
+  margin-top: -8%;
+  position: absolute;
+  color: black;
+  animation-name: welcome-desk;
+  animation-duration: 20s;
+  animation-delay: -10s;
+  z-index: 1;
+  display: initial;
+}
+.welcome-anima-mobile{
+  font-family: Tahoma, Verdana, Segoe, sans-serif;
+  font-size: 45px;
+  width: 300px;
+  height: 100px;
+  margin-top: -10%;
+  font-weight: bold;
+  position: absolute;
+  color: black;
+  animation-name: welcome-mobile;
+  animation-duration: 20s;
+  animation-delay: -10s;
+  z-index:2;
+  display: initial;
+}
+.welcome-anima2-desk{
+  font-size: 50px;
+  font-family: Tahoma, Verdana, Segoe, sans-serif;
+  width: 200px;
+  height: 100px;
+  margin-top: -8%;
+  position: absolute;
+  color: black;
+  animation-name: welcome-desk2;
+  animation-duration: 20s;
+  animation-delay: -10s;
+  z-index: 1;
+  display: initial;
+}
+.welcome-anima2-mobile{
+  font-size: 50px;
+  font-weight: bold;
+  font-family: Tahoma, Verdana, Segoe, sans-serif;
+  width: 200px;
+  height: 100px;
+  margin-top: -10%;
+  position: absolute;
+  color: black;
+  animation-name: welcome-mobile2;
+  animation-duration: 20s;
+  animation-delay: -10s;
+  z-index: 1;
+  display: initial;
+}
+@keyframes welcome-desk {
+
+  25%  {color: red; left: 1100px; top:200px; display: block}
+  50%  {color: darkred; left:1500px; top:200px; display: block}
+  75%  {color: darkred; left:600px; top:200px; display: block}
+
+}
+@keyframes welcome-desk2 {
+
+  25%  {color: red; left:100px; top:300px; display: block}
+  50%  {color: darkred; left:100px; top:300px; display: block}
+  75%  {color: darkred; left:700px; top:300px; display: block}
+
+}
+@keyframes welcome-mobile {
+
+  25%  {color: red; left:1700px; top:300px; display: block}
+  50%  {color: red; left:1100px; top:300px; display: block}
+  75%  {color: darkred; left:0px; top:300px; display: block}
+
+}
+@keyframes welcome-mobile2 {
+
+  25%  {color: red; left:-1300px; top:350px; display: block}
+  50%  {color: red; left:-700px; top:350px; display: block}
+  75%  {color: darkred; left:100px; top:350px; display: block}
+
+}
 .glossy {
   text-align: center;
 }
-.title{
-  margin-right: 5%;
-  padding: 0px 150px 0px 150px;
-  opacity: 0.85;
-  font-size: 50px;
-  text-align: center;
-  border-radius: 20px;
-
-  background-color: black;
-  color: white;
-  margin-top: 10px;
-
-  display: inline-block;
-
-  border-style: solid;
-  border-color: darkred;
-
-
-
+.desktop{
+  margin-top: 2%;
+ margin-right: auto;
+ margin-left: auto;
+  width: 1000px;
 }
-.first{
-  background-color: #1D1D1D;
-}
+
 </style>

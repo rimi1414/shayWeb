@@ -11,12 +11,7 @@ export default {
     updateUser(state, payload){
         Object.assign(state.users[payload.userId], payload.userDetails)
     },
-    addMessage(state, payload){
-        Vue.set(state.messages, payload.messageId, payload.messageDiteils)
-    },
-    clearMessages(state){
-       state.messages={}
-    }
+
 
 
 }

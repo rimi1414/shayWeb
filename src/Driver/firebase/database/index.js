@@ -3,9 +3,9 @@ import "firebase/storage";
 import "firebase/database";
 
 
-function getRef(options){
-   return  firebaseInstance.firebase.database().ref(`users`)
-}
+// function getRef(options){
+//    return  firebaseInstance.firebase.database().ref(`users`)
+// }
 function create(options){
     return firebaseInstance.firebase.database()
         .ref(`users/${window.user.uid}/data/${options.entity}`).push(options.customers);
@@ -31,6 +31,18 @@ function create(options){
 //         })
 // }
 
+function startAfter(){
+
+    return  firebaseInstance.firebase.database()
+        .ref('users')
+        .orderByChild('height')
+        .startAt('1').on('value', snapshot => {
+
+            const map = snapshot.val();
+            console.log(map)
+        });
+}
+
 // ללא אידי:
 function get(options){
     return firebaseInstance.firebase.database()
@@ -40,7 +52,7 @@ function get(options){
             const map = res.val();
             for (const key in map) {
                 const item = map[key].data.profiles;
-                item.id = key;
+                item.id = key
                 arr.push(item);
             }
             return arr;
@@ -48,21 +60,21 @@ function get(options){
 }
 
 
-
-function read(options){
-    return firebaseInstance.firebase.database().ref(`users`).once('value')
-        .then(res =>{
-            const arr =[];
-           const map = res.val();
-for(const i in map) {
-        const item = map[i].data.profiles;
-        item.id = i
-        arr.push(item)
-
-}
-            return arr;
-        })
-}
+//
+// function read(options){
+//     return firebaseInstance.firebase.database().ref(`users`).once('value')
+//         .then(res =>{
+//             const arr =[];
+//            const map = res.val();
+// for(const i in map) {
+//         const item = map[i].data.profiles;
+//         item.id = i
+//         arr.push(item)
+//
+// }
+//             return arr;
+//         })
+// }
 
  function post(options){
     return firebaseInstance.firebase.database()
@@ -92,18 +104,18 @@ function deleteprofile(options){
 //         })
 // }
 
-function getmyprofile(options){
+function getThisProfile(options){
     return firebaseInstance.firebase.database().ref(`users/${options.id}/data/${options.entity}`).once('value')
         .then(res =>{
             return res.val();
         })
 }
-function getmyprofile1(options){
-    return firebaseInstance.firebase.database().ref(`users/${window.user.uid}`)
-        .then(res =>{
-            return res.val();
-        })
-}
+// function getmyprofile1(options){
+//     return firebaseInstance.firebase.database().ref(`users/${window.user.uid}`)
+//         .then(res =>{
+//             return res.val();
+//         })
+// }
 
 function postLev(options){
     return firebaseInstance.firebase.database()
@@ -111,7 +123,11 @@ function postLev(options){
         .push(options.lev)
 
 }
-
+function setLoveAfterDell(options){
+    return firebaseInstance.firebase.database()
+        .ref(`users/${window.user.uid}/data/profiles/lev`)
+        .set(options)
+}
 
 // יוזר כאשר יש לו איידי
 // function get(options){
@@ -151,16 +167,12 @@ export default {
     get,
     post,
     postLev,
-    getmyprofile,
+    getThisProfile,
     updateprofile,
     deleteprofile,
-    getRef,
-    // getById,
+    setLoveAfterDell,
+    // getRef,
     create,
-    getmyprofile1,
-
-    // image,
-    // onUpload
 }
 
 // onUpload(){

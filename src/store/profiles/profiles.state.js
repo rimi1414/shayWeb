@@ -1,10 +1,11 @@
 export default {
-    searchByName:null,
+    isLove:false,
+    allMyLove:[],
     profiles :[],
+    myProfile: null,
     profile: null,
     editedProfileId:'',
     profileId:null,
-    model3:false,
     editedProfile :{
         name:'',
         date:'',
