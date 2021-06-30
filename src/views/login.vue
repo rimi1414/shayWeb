@@ -42,7 +42,7 @@
 
 <script>
 import firebaseInstance from '../Driver/firebase'
-import loginregister from "@/components/loginregister";
+import loginregister from "@/components/login/loginregister";
 export default {
 name: "first",
   components: {
@@ -62,65 +62,7 @@ name: "first",
 
     }
   },
-  // methods : {
-  //   goToHome() {
-  //     this.$router.push(`/`)
-  //   },
-  //   login(){
-  //     const provider = new firebaseInstance.firebase.auth.GoogleAuthProvider();
-  //     firebaseInstance.firebase.auth()
-  //         .signInWithPopup(provider)
-  //         .then((result) => {
-  //           /** @type {firebase.auth.OAuthCredential} */
-  //           var credential = result.credential;
-  //
-  //           // This gives you a Google Access Token. You can use it to access the Google API.
-  //           var token = credential.accessToken;
-  //           // The signed-in user info.
-  //           var user = result.user;
-  //           window.user = result.user;
-  //           this.$router.push('/')
-  //           // ...
-  //         }).catch((error) => {
-  //       // Handle Errors here.
-  //       var errorCode = error.code;
-  //       var errorMessage = error.message;
-  //       // The email of the user's account used.
-  //       var email = error.email;
-  //       // The firebase.auth.AuthCredential type that was used.
-  //       var credential = error.credential;
-  //       // ...
-  //     });
-  //   },
-  //   newlogin(){
-  //     firebaseInstance.firebase.auth()
-  //         .createUserWithEmailAndPassword(this.inputdata.email, this.inputdata.password)
-  //         .then((userCredential) => {
-  //           // Signed in
-  //           var user = userCredential.user;
-  //           window.user = userCredential.user;
-  //           this.$router.push('/')
-  //           // ...
-  //         })
-  //         .catch((error) => {
-  //           var errorCode = error.code;
-  //           var errorMessage = error.message;
-  //           // ..
-  //         });
-  //   },
-  //   returnlogin(){
-  //     firebaseInstance.firebase.auth().signInWithEmailAndPassword(this.inputdata.emaillog, this.inputdata.passwordlog)
-  //         .then((userCredential) => {
-  //           // Signed in
-  //           var user = userCredential.user;
-  //           // ...
-  //         })
-  //         .catch((error) => {
-  //           var errorCode = error.code;
-  //           var errorMessage = error.message;
-  //         });
-  //   }
-  // },
+
   created() {
   if (window.user){
     this.$router.push('/profiles')

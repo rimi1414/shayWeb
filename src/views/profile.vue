@@ -50,8 +50,8 @@
 
 <script>
 
-import AddProfile from "@/components/AddProfile";
-import ProfilesTable from "@/components/profiles/ProfilesTable";
+import AddProfile from "@/components/allOfProfiles/AddProfile";
+import ProfilesTable from "@/components/allOfProfiles/ProfilesTable";
 import caruseloneprofile from "@/components/profile/caruseloneprofile";
 import {mapActions, mapMutations, mapState} from "vuex";
 

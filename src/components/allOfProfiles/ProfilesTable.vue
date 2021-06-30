@@ -82,9 +82,9 @@
 </template>
 
 <script>
-import carusel from "@/components/carusel";
+import carusel from "@/components/profiles/carusel";
 import {mapState, mapActions} from 'vuex';
-import setting from "@/components/setting";
+import setting from "@/components/profile/setting";
 import profilesOnline from "@/components/profiles/profilesOnline";
 import profilesFavorite from "@/components/profiles/profilesFavorite";
 

@@ -108,8 +108,8 @@
 <script>
 
 const inputs = ['primary', 'secondary'];
-import localStorageDriver from '../Driver/Local-Storage'
-import firebaseInstance from '../Driver/firebase';
+import localStorageDriver from '../../Driver/Local-Storage'
+import firebaseInstance from '../../Driver/firebase';
 import {mapMutations, mapState, mapActions,} from 'vuex';
 export default {
   name: "AddProfile",

@@ -1,4 +1,4 @@
-<!--todo: redesign menu: which search buttons should we keep and which ones we can pass-->
+
 
 <template dir="rtl">
   <div dir="rtl">
@@ -27,32 +27,7 @@
           </q-btn>
         </q-item-label>
 
-        <!--        todo: new component for groups-->
-<!--        <q-item-->
-<!--          :class="{'chosenChat':(group.name == $route.params.id)}"-->
-<!--          v-for="group in groups"-->
-<!--          :key="group.name"-->
-<!--          :to="screenSize === 'large'? '/chat/'+ group.name : '/b/chat-page/' + group.name"-->
-<!--          clickable-->
-<!--          v-ripple>-->
-<!--          <q-item-section avatar>-->
-<!--            <q-avatar class="a-avatar">-->
-<!--              <img :src="`https://cdn.quasar.dev/img/${group.avatar}`">-->
-<!--            </q-avatar>-->
-<!--          </q-item-section>-->
 
-<!--          <q-item-section>-->
-<!--            <q-item-label>{{ group.name }}</q-item-label>-->
-<!--            <q-item-label caption lines="1">{{ 'last message' }}</q-item-label>-->
-<!--          </q-item-section>-->
-
-<!--          <q-item-section side>-->
-<!--            <q-badge color="red">-->
-<!--              99+-->
-<!--              &lt;!&ndash;notification num&ndash;&gt;-->
-<!--            </q-badge>-->
-<!--          </q-item-section>-->
-<!--        </q-item>-->
 
         <q-separator/>
 
@@ -103,14 +78,13 @@
 </template>
 
 <script>
-//
-//import {mapActions, mapGetters, mapState} from 'vuex'
+
 
 import {mapActions, mapState} from "vuex";
 
 export default {
   name: "ChatMenu",
-  // props: ['screenSize'],
+
   data() {
     return {
       text: '',
@@ -140,33 +114,7 @@ export default {
 
 
   },
-  // computed: {
-  //   ...mapGetters('users', ['users']),
-  //   ...mapState('chat', ['lastMessage']),
-  //   ...mapState('group', ['groups']),
-  // },
-  // methods: {
-  //   ...mapActions('users', ['getUsers']),
-  //   ...mapActions('chat', ['getLastMessageAction']),
-  //   ...mapActions('group', ['getMyGroup']),
 
-//todo: check
-//     async getThisLastMessage() {
-//       for (let user in this.users) {
-//         await this.getLastMessageAction(user)
-//       }
-//todo: change name to this.lastMessages
-//       this.last = this.lastMessage
-//     },
-//   },
-
-  // created() {
-  //   this.getMyGroup()
-  //   this.getUsers()
-  //     .then(() => {
-  //       this.getThisLastMessage()
-  //     })
-  // }
 }
 
 </script>

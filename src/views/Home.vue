@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import AddProfile from "@/components/AddProfile";
+import AddProfile from "@/components/allOfProfiles/AddProfile";
 
 
 

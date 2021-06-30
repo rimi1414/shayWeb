@@ -43,7 +43,7 @@
 <script>
 import profilesHeader from "@/components/profiles/profilesHeader";
 import {mapState} from "vuex";
-import carusel from "@/components/carusel";
+import carusel from "@/components/profiles/carusel";
 
 export default {
 

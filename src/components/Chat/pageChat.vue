@@ -21,10 +21,10 @@
 
   </div>
 
-  <q-footer elevated :style="this.screenSize >600 ? 'width: 50%; margin-left: 30% ': 'width: 100%'">
+  <q-footer elevated :style="this.screenSize >600 ? 'width: 40%; margin-left: 43%; backgroundColor: #d4a422 ': 'width: 100%;  backgroundColor: #d4a422'">
     <q-toolbar>
-      <q-from class="full-width" @submit="sendMessage">
-      <q-input ref="newMessage" bg-color="white" v-model="newMessage" outlined rounded label="message" dense>
+      <q-from class="full-width"  @submit="sendMessage">
+      <q-input ref="newMessage" bg-color="white" v-model="newMessage" outlined rounded label="your message" dense>
         <template v-slot:after>
           <q-btn @click="sendMessage" type="submit" round dense flat icon="send" color="white"/>
         </template>
@@ -127,10 +127,5 @@ let pageChat = this.$refs.pageChat.$el
   max-height: 100%
   max-width: 100%
 
-/*.banner1{*/
 
-/* margin-top: -10px;*/
-/*  z-index: 2;*/
-/*  opacity: 0.8;*/
-/*}*/
 </style>

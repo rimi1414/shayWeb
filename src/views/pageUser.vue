@@ -1,8 +1,8 @@
-<!--todo: redesign menu: which search buttons should we keep and which ones we can pass-->
+
 
 <template>
 
-<div>
+<div style="margin-left: 20%">
 
   <q-card flat class="no-padding no-margin row" >
 
@@ -19,51 +19,6 @@
   </q-card>
 </div>
 
-<!--  <div class="contain">-->
-
-
-
-
-
-<!--    <ChatMenu/>-->
-
-<!--    <pageChat/>-->
-
-
-
-<!--    <br>-->
-<!--    <br>-->
-<!--    <br>-->
-<!--    <q-list  >-->
-<!--&lt;!&ndash;        <q-item&ndash;&gt;-->
-
-<!--&lt;!&ndash;            class="bg-grey-9 text-white shadow-2 rounded-borders"&ndash;&gt;-->
-<!--&lt;!&ndash;            v-for="(user, key) in users" :key="key"&ndash;&gt;-->
-<!--&lt;!&ndash;            :to="'/chat/'+ key"&ndash;&gt;-->
-<!--&lt;!&ndash;            v-if="user.name"&ndash;&gt;-->
-<!--&lt;!&ndash;            clickable&ndash;&gt;-->
-<!--&lt;!&ndash;            v-ripple>&ndash;&gt;-->
-<!--&lt;!&ndash;          <q-item-section avatar>&ndash;&gt;-->
-
-<!--&lt;!&ndash;            <q-avatar class="a-avatar" v-if="!user.img">&ndash;&gt;-->
-<!--&lt;!&ndash;              <img :src=user.pic>&ndash;&gt;-->
-<!--&lt;!&ndash;            </q-avatar>&ndash;&gt;-->
-
-<!--&lt;!&ndash;          </q-item-section>&ndash;&gt;-->
-
-<!--&lt;!&ndash;          <q-item-section>&ndash;&gt;-->
-<!--&lt;!&ndash;            <q-item-label style=" margin-right: 2%">{{ user.name }}</q-item-label>&ndash;&gt;-->
-<!--&lt;!&ndash;            <q-item-label caption lines="1">{{ last[user.id] }}</q-item-label>&ndash;&gt;-->
-<!--&lt;!&ndash;          </q-item-section>&ndash;&gt;-->
-
-<!--&lt;!&ndash;          <q-item-section side>&ndash;&gt;-->
-<!--&lt;!&ndash;            <q-badge&ndash;&gt;-->
-<!--&lt;!&ndash;                :color="user.online  ? 'light-green-5' : 'grey-4'">&ndash;&gt;-->
-<!--&lt;!&ndash;            </q-badge>&ndash;&gt;-->
-<!--&lt;!&ndash;          </q-item-section>&ndash;&gt;-->
-<!--&lt;!&ndash;        </q-item>&ndash;&gt;-->
-<!--    </q-list>-->
-<!--  </div>-->
 </template>
 
 <script>
@@ -77,22 +32,7 @@ import pageChat from "../components/Chat/pageChat"
 export default {
   name: "pageUser",
   components: {ChatMenu, pageChat},
-  // data() {
-  //   return {
-  //     screenSize : window.innerWidth,
-  //     text: '',
-  //     last: {},
-  //     dense: false,
-  //
-  //     thumbStyle: {
-  //       right: '4px',
-  //       borderRadius: '5px',
-  //       backgroundColor: '#d4a422',
-  //       width: '5px',
-  //       opacity: 0.75
-  //     },
-  //   }
-  // },
+
   data() {
     return {
       screenSize: '',
@@ -101,19 +41,11 @@ export default {
     }
   },
   computed: {
-    // todo: check this getters
-    // ...mapGetters('users', ['users']),
+
     ...mapState('logUser', ['users']),
-    // ...mapState('chat', ['users']),
-    // ...mapState('group', ['groups']),
+
   },
-  // methods: {
-  //   // ...mapActions('users', ['getUsers']),
-  //   ...mapActions('logUser', ['firebaseGetUser' ]),
-  //   ...mapActions('chat', ['getProfileMessages']),
-  //
-  //
-  // },
+
   methods: {
       ...mapActions('logUser', ['firebaseGetUser' ]),
     screenSizeCheck() {
@@ -140,17 +72,7 @@ export default {
   },
 
 
-  // created() {
-  //
-  //   this.firebaseGetUser().then(()=>{
-  //     console.log(this.users)
-  //     console.log(this.users)
-  //     console.log(this.users)
-  //     this.getProfileMessages(this.users)
-  //   })
-  //
-  //
-  // }
+
 }
 
 </script>
