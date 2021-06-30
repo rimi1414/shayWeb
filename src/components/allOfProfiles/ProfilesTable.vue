@@ -82,7 +82,7 @@
 </template>
 
 <script>
-import carusel from "@/components/profiles/carusel";
+import carousel from "@/components/profiles/carousel";
 import {mapState, mapActions} from 'vuex';
 import setting from "@/components/profile/setting";
 import profilesOnline from "@/components/profiles/profilesOnline";
@@ -90,7 +90,7 @@ import profilesFavorite from "@/components/profiles/profilesFavorite";
 
 export default {
   name: "ProfilesTable",
-  components: {carusel, setting, profilesOnline, profilesFavorite},
+  components: {carousel, setting, profilesOnline, profilesFavorite},
   props: ['tableName'],
 
   data() {

@@ -25,7 +25,7 @@ import {mapMutations, mapState} from 'vuex'
 export default {
 
 
-  name: "carusel",
+  name: "carousel",
   data:() => ({
     slides: [],
     model3: 4.5,

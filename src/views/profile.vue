@@ -7,7 +7,7 @@
     <div :class=" screenSize >600 ? 'contain' : 'containMobile'">
 <q-card :class="screenSize < 600 ? 'card-btn-mobile' : 'card-btn-desct'" >
       <q-btn v-if="bool === true" color="withe" icon="image"  size="17px"  @click="displayTable()" class="btn1"/>
-      <q-btn v-if="bool === false"  color="withe"  icon="assignment_ind"  size="17px"  @click="displayCarusel()" class="btn1"/>
+      <q-btn v-if="bool === false"  color="withe"  icon="assignment_ind"  size="17px"  @click="displayCarousel()" class="btn1"/>
 </q-card>
 
       <div class="q-pa-md">
@@ -34,8 +34,8 @@
 
         <br>  <br>  <br>  <br>  <br>  <br>
         <br><br><br><br>  <br><br><br><br>  <br><br><br><br>   <br><br><br><br> <br><br><br><br>   <br><br><br><br>    <br><br><br><br>    <br><br><br><br>
-    <q-card :class="screenSize > 600 ? 'carusel-d' : 'carusel-m'" id="caruselElementId" style= "display: none" >
-      <caruseloneprofile  />
+    <q-card :class="screenSize > 600 ? 'carousel-d' : 'carousel-m'" id="carouselElementId" style= "display: none" >
+      <carouselOneProfile  />
     </q-card>
 
   </q-card>
@@ -52,7 +52,7 @@
 
 import AddProfile from "@/components/allOfProfiles/AddProfile";
 import ProfilesTable from "@/components/allOfProfiles/ProfilesTable";
-import caruseloneprofile from "@/components/profile/caruseloneprofile";
+import carouselOneProfile from "@/components/profile/carouselOneProfile";
 import {mapActions, mapMutations, mapState} from "vuex";
 
 
@@ -60,7 +60,7 @@ import {mapActions, mapMutations, mapState} from "vuex";
 export default {
   name: "profile",
   components: {
-    AddProfile, ProfilesTable, caruseloneprofile
+    AddProfile, ProfilesTable, carouselOneProfile
   },
 
   data() {
@@ -77,17 +77,17 @@ export default {
   },
   computed: { ...mapState('profiles', [ 'profiles', 'profile'])},
   methods: {
-    ...mapMutations('profiles', ['setEditedProfile', 'setEditedProfileId', 'resetProfile', 'setProfileId','setLev' , 'resetMyProfile']),
+    ...mapMutations('profiles', ['setEditedProfile', 'setEditedProfileId', 'resetProfile', 'setProfileId' , 'resetMyProfile']),
     ...mapActions('profiles', ['insertProfile', 'updateProfile', 'getOneProfile']),
 
 
      displayTable() {
        document.getElementById("tableElementId").style.display = "none"
-       document.getElementById("caruselElementId").style.display = "block"
+       document.getElementById("carouselElementId").style.display = "block"
        this.bool = false
 },
-    displayCarusel() {
-      document.getElementById("caruselElementId").style.display = "none"
+    displayCarousel() {
+      document.getElementById("carouselElementId").style.display = "none"
       document.getElementById("tableElementId").style.display = "block"
       this.bool= true
     },
@@ -117,7 +117,7 @@ this.resetMyProfile();
 
 <style scoped>
 
-.carusel-m{
+.carousel-m{
   width: 20%;
   margin-top: 25vh;
   margin-right: 25%;
@@ -125,7 +125,7 @@ this.resetMyProfile();
   height: 100%;
   background-color: rgba(0,0,0, 0.0)
 }
-.carusel-d{
+.carousel-d{
   width: 100%;
   margin-top: 25vh;
   margin-right: 25%;
@@ -178,7 +178,7 @@ margin-top: -5%;
   backdrop-filter: blur(8px);
 
 }
-.carusel{
+.carousel{
   margin-top: -30%;
   margin-right: 50%;
 }

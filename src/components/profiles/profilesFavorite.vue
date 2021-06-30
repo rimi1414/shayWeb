@@ -1,7 +1,7 @@
 <template>
   <div class="btn-favorite">
     <q-rating @click="lev(profileId)"
-              v-model="cc"
+              v-model="love"
               max="1"
               size="3em"
               color="red"
@@ -22,7 +22,7 @@ export default {
 
   data() {
     return {
-      cc: 0,
+      love: 0,
       profileId: null,
       me:null,
     }
@@ -31,7 +31,7 @@ export default {
   methods:{
     ...mapActions('profiles', [ 'postLevProfile', 'getLove', 'deleteThisLove']),
     lev(id) {
-      if (this.cc === 1 ) {
+      if (this.love === 1 ) {
         this.postLevProfile(id)
       } else {
         this.deleteThisLove(this.$route.params.id)
@@ -40,7 +40,7 @@ export default {
   },
   created() {
     this.getLove(this.$route.params.id).then(()=>{
-      this.cc = this.isLove
+      this.love = this.isLove
     })
     // this.getProfileLove()
     // this.me = `${window.user.uid}`;

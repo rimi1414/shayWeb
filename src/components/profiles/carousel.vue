@@ -38,7 +38,7 @@ import {mapGetters, mapMutations, mapState, mapActions} from 'vuex'
 
 export default {
 
-  name: "carusel",
+  name: "carousel",
   data:() => ({
     profilesCarousel :'',
     searchByName:'',
@@ -94,6 +94,7 @@ export default {
       if(this.profiles.length === 0 || this.profiles === null){
         this.$emit('noFavorite')
       }
+
     }
   },
   watch: {

@@ -11,9 +11,9 @@
         <q-separator dark  style=" background-color: darkred"/>
         <q-card-section>
 
-<!--          carusel-->
-          <carusel />
-          <!--          carusel-->
+<!--          carousel-->
+          <carousel />
+          <!--          carousel-->
 
 
           <template>
@@ -43,14 +43,14 @@
 <script>
 import profilesHeader from "@/components/profiles/profilesHeader";
 import {mapState} from "vuex";
-import carusel from "@/components/profiles/carusel";
+import carousel from "@/components/profiles/carousel";
 
 export default {
 
 
   name: "profiles",
   components: {
-     carusel, profilesHeader
+    carousel, profilesHeader
   },
   data() {
     return {
@@ -64,7 +64,7 @@ export default {
     }
   },
 
-  computed: {...mapState('profiles', ['editedProfileId', 'profiles', 'profile' , 'model3']),
+  computed: {...mapState('profiles', ['editedProfileId', 'profiles', 'profile' ]),
     ...mapState('chat', ['users' ,'userDetails'])},
 
   // todo:router gard:

@@ -23,10 +23,10 @@
         <q-separator dark  style=" background-color: darkred"/>
         <q-card-section>
 
-          <carusel @noFavorite="noHaveFavorite"/>
-          <q-card v-if="noFavorite === false" class="backNone">
+          <carousel @noFavorite="noHaveFavorite"/>
+          <q-card v-if="noFavorite === false  " class="backNone">
             <p>
-              אוי אין לך עדיין פייבוריטים... זה הזמן לאסוף כמה:
+              אוי! אין לך עדיין פייבוריטים... זה הזמן לאסוף כמה:
             </p>
             <p>
               תחזור לפרופילים ותתחיל לאסוף.. בקרוב אם יהיה מאץ תוכל לראות בעמוד אשר בבניה
@@ -55,14 +55,14 @@
 <script>
 
 import {mapState} from "vuex";
-import carusel from "@/components/profiles/carusel";
+import carousel from "@/components/profiles/carousel";
 
 export default {
 
 
   name: "profiles",
   components: {
-     carusel
+    carousel
   },
   data() {
     return {
