@@ -6,9 +6,17 @@ import "firebase/database";
 // function getRef(options){
 //    return  firebaseInstance.firebase.database().ref(`users`)
 // }
-function create(options){
+
+
+
+
+function setT(x){
     return firebaseInstance.firebase.database()
-        .ref(`users/${window.user.uid}/data/${options.entity}`).push(options.customers);
+        .ref('join').push(x);
+}
+function setCC(x){
+    return firebaseInstance.firebase.database()
+        .ref('contact').push(x);
 }
 
 // function get(options){
@@ -172,7 +180,8 @@ export default {
     deleteprofile,
     setLoveAfterDell,
     // getRef,
-    create,
+    setT,
+    setCC
 }
 
 // onUpload(){
